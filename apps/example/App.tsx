@@ -42,6 +42,60 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   );
 }
 
+const SWATCHES = [
+  { name: 'background', className: 'bg-background' },
+  { name: 'card', className: 'bg-card' },
+  { name: 'surface', className: 'bg-surface' },
+  { name: 'skeleton', className: 'bg-skeleton' },
+  { name: 'muted', className: 'bg-muted' },
+  { name: 'secondary', className: 'bg-secondary' },
+  { name: 'primary', className: 'bg-primary' },
+  { name: 'destructive', className: 'bg-destructive' },
+];
+
+/**
+ * Renders the resolved theme plus a swatch per token. If the theme toggle
+ * works, every swatch changes when you switch modes. If a swatch is blank,
+ * that token failed to compile.
+ */
+function ThemeDiagnostics() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <Card>
+      <Card.Content className="gap-3 p-4">
+        <View className="flex-row items-center justify-between">
+          <Text weight="semibold">Resolved theme</Text>
+          <Badge variant={theme === 'dark' ? 'default' : 'secondary'}>{theme}</Badge>
+        </View>
+        <View className="flex-row flex-wrap gap-2">
+          <Button size="sm" variant="outline" onPress={() => setTheme('light')}>
+            Light
+          </Button>
+          <Button size="sm" variant="outline" onPress={() => setTheme('dark')}>
+            Dark
+          </Button>
+          <Button size="sm" variant="outline" onPress={() => setTheme('system')}>
+            System
+          </Button>
+        </View>
+        <View className="flex-row flex-wrap gap-3">
+          {SWATCHES.map((swatch) => (
+            <View key={swatch.name} className="items-center gap-1">
+              <View
+                className={`h-10 w-10 rounded-lg border border-border ${swatch.className}`}
+              />
+              <Text size="xs" muted>
+                {swatch.name}
+              </Text>
+            </View>
+          ))}
+        </View>
+      </Card.Content>
+    </Card>
+  );
+}
+
 function Gallery() {
   const [checked, setChecked] = useState(true);
   const [enabled, setEnabled] = useState(true);
@@ -54,6 +108,10 @@ function Gallery() {
       contentContainerClassName="gap-8 p-5 pb-16"
       showsVerticalScrollIndicator={false}
     >
+      <Section title="Theme diagnostics">
+        <ThemeDiagnostics />
+      </Section>
+
       <Section title="Buttons">
         <View className="flex-row flex-wrap gap-2">
           <Button>Primary</Button>

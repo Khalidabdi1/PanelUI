@@ -10,7 +10,9 @@
     "example": "npm run start --workspace=example",
     "build": "npm run build --workspace=panelui-native",
     "typecheck": "npm run typecheck --workspaces --if-present",
-    "lint": "npm run lint --workspaces --if-present"
+    "lint": "npm run lint --workspaces --if-present",
+    "example:clear": "npm run start --workspace=example -- --clear",
+    "reset": "rm -rf apps/example/.expo apps/example/node_modules/.cache node_modules/.cache $TMPDIR/metro-* $TMPDIR/haste-map-* 2>/dev/null; echo \"caches cleared\""
   },
   "engines": {
     "node": ">=20"
