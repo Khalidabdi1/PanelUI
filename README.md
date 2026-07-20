@@ -36,11 +36,14 @@
 | Badge | Frame | Skeleton |
 | BottomSheet | InlineSelect | Spinner |
 | Button | Input | Switch |
-| Card | | Tabs |
+| Card | Progress | Tabs |
 
 `Select` opens a bottom-sheet picker; `InlineSelect` expands its options in place.
 `Frame` is a tinted grouping container (Coss's CardFrame) with `Frame.Header`,
 `Frame.Panel`, `Frame.Row`, and `Frame.Footer` for grouped list sections.
+`Progress` is a determinate/indeterminate bar whose fill is measured once and
+animated purely on the UI thread; `Button` accepts a `loading` prop that swaps in
+a spinner and makes the button non-interactive without collapsing its width.
 
 Plus primitives: `PanelUIProvider`, `Portal`, `AnimatedPressable`, `useTheme`, `cn`.
 
@@ -138,6 +141,15 @@ Every component accepts `className`, so you can restyle anything with Tailwind c
 <Button className="w-full rounded-full" labelClassName="uppercase">
   Continue
 </Button>
+```
+
+```tsx
+// Async action: show a spinner while the request is in flight.
+<Button loading={isSaving} onPress={save}>Save</Button>
+
+// Determinate and indeterminate progress.
+<Progress value={uploaded} max={total} variant="success" />
+<Progress indeterminate />
 ```
 
 ### Dark mode

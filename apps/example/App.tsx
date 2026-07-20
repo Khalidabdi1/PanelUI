@@ -1,6 +1,6 @@
 import './global.css';
 
-import { useCallback, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { FlatList, ScrollView, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -17,6 +17,7 @@ import {
   InlineSelect,
   Input,
   PanelUIProvider,
+  Progress,
   RadioGroup,
   Select,
   Skeleton,
@@ -38,6 +39,46 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
         {title}
       </Text>
       {children}
+    </View>
+  );
+}
+
+/**
+ * Drives a determinate bar with a looping timer so the spring-based fill is
+ * visible, alongside the static variants and an indeterminate bar.
+ */
+function ProgressDemo() {
+  const [value, setValue] = useState(30);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setValue((current) => (current >= 100 ? 0 : current + 20));
+    }, 1200);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <View className="gap-4">
+      <View className="gap-2">
+        <View className="flex-row items-center justify-between">
+          <Text size="sm" muted>
+            Uploading
+          </Text>
+          <Text size="sm" weight="medium">
+            {value}%
+          </Text>
+        </View>
+        <Progress value={value} />
+      </View>
+      <Progress value={80} variant="success" size="sm" />
+      <Progress value={55} variant="warning" />
+      <Progress value={40} variant="destructive" size="lg" />
+      <View className="gap-2">
+        <Text size="sm" muted>
+          Indeterminate
+        </Text>
+        <Progress indeterminate />
+      </View>
     </View>
   );
 }
@@ -126,6 +167,10 @@ function Gallery() {
           </Button>
           <Button size="lg">Large</Button>
           <Button disabled>Disabled</Button>
+          <Button loading>Loading</Button>
+          <Button variant="outline" loading>
+            Saving
+          </Button>
         </View>
       </Section>
 
@@ -362,6 +407,10 @@ function Gallery() {
             />
           </Card.Content>
         </Card>
+      </Section>
+
+      <Section title="Progress">
+        <ProgressDemo />
       </Section>
 
       <Section title="Feedback">

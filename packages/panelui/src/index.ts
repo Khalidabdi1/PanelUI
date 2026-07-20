@@ -33,6 +33,7 @@ export {
   type InlineSelectProps,
   type InlineSelectItemProps,
 } from './components/inline-select';
+export { Progress, type ProgressProps } from './components/progress';
 export { Select, type SelectProps, type SelectItemProps } from './components/select';
 export {
   Tabs,
