@@ -29,20 +29,25 @@
 
 ## Components
 
-| | | |
-| --- | --- | --- |
-| Alert | Checkbox | RadioGroup |
-| Avatar | Dialog | Select |
-| Badge | Frame | Skeleton |
-| BottomSheet | InlineSelect | Spinner |
-| Button | Input | Switch |
-| Card | Progress | Tabs |
+| | | | |
+| --- | --- | --- | --- |
+| Accordion | Card | InputGroup | Steps |
+| Alert | Checkbox | Label | Surface |
+| Avatar | Dialog | Progress | Switch |
+| Badge | EmptyState | RadioGroup | Tabs |
+| BottomSheet | Frame | ScrollFade | Timeline |
+| Button | InlineSelect | Select | Toast |
+| Checkbox | Input | Shimmer | Typography |
+| | | Skeleton / Spinner | |
 
 `Select` opens a bottom-sheet picker; `InlineSelect` expands its options in place.
 `Frame` is a tinted grouping container (Coss's CardFrame) with `Frame.Header`,
 `Frame.Panel`, `Frame.Row`, and `Frame.Footer` for grouped list sections.
+`Toast` is imperative (`toast(...)` / `useToast`) and renders through `ToastViewport`.
 
-Plus primitives: `PanelUIProvider`, `Portal`, `AnimatedPressable`, `useTheme`, `cn`.
+Plus primitives (`PanelUIProvider`, `Portal`, `AnimatedPressable`, `useTheme`,
+`cn`) and hooks (`useBreakpoint`, `useCopyToClipboard`, `useDebouncedValue`,
+`useDisclosure`, `useKeyboard`, `usePrevious`).
 
 ## Installation
 
